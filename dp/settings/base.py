@@ -103,6 +103,10 @@ TEMPLATE_DIRS = (
     Path(PROJECT_ROOT, "templates"),
 )
 
+ABSOLUTE_URL_OVERRIDES = {
+    "auth.user": lambda o: "/p/%s/" % o.username,
+}
+
 DJANGO_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
@@ -117,7 +121,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     "south",
     "floppyforms",
-    "cripy_forms",
+    "crispy_forms",
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
