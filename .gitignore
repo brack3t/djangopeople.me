@@ -2,3 +2,4 @@
 ._*
 *.pyc
 dp/settings/local.py
+dp/settings/secret.py
