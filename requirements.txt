@@ -3,3 +3,5 @@ South==0.7.3
 django-crispy-forms==1.1.1
 django-floppyforms==0.4.7
 wsgiref==0.1.2
+unipath==0.2.1
+psycopg2==2.4.4
