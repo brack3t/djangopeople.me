@@ -16,37 +16,38 @@
 
     <script src="{{ STATIC_URL }}js/libs/modernizr.custom.00979.js"></script>
 </head>
-<body>
+<body id="{% block page_id %}{% endblock %}">
     <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-    {% block page_header %}
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="#">DjangoPeople</a>
-                <div class="nav-collpase">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
+    {% block page_header %}{% endblock %}
+
+    {% block content_override %}
+    <div class="container-fluid">
+        {% block content %}
+        <div class="row-fluid">
+            <div class="span3">
+            {% block page_sidebar %}{% endblock %}
+            </div>
+            <div class="span9">
+            {% block page_content %}{% endblock %}
             </div>
         </div>
+        {% endblock %}
     </div>
     {% endblock %}
 
-    <div class="container">
-        {% block page_content %}
-        {% endblock %}
-    </div
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-    <script src="{{ STATIC_URL }}js/bootstap/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-alert.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-dropdown.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-tab.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-popover.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-button.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-collapse.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-carousel.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap/bootstrap-typeahead.js"></script>
     {% block end_body_js %}{% endblock %}
     <script>
         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

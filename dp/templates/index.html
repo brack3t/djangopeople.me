@@ -1,12 +1,86 @@
-{% extends "_layouts/index.html" %}
+{% extends "_layouts/base.html" %}
 
 {% block page_title %}Welcome to {% endblock %}
 
-{% block page_header %}{% endblock %}
+{% block extra_css %}
+    {% include "_partials/_map_includes.html" %}
+{% endblock %}
 
-{% block page_content %}
-<div class="row-fluid">
-    <div class="span12" style="border:1px solid red;">
-        Map here
+{% block page_id %}home{% endblock %}
+
+{% block page_header %}
+<div id="map"></div>
+{% endblock %}
+
+{% block content_override %}
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/"><span class="logo"></span><span class="text">DjangoPeople</span></a>
+            <div class="nav-collapse">
+                <ul class="nav">
+
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                {% if request.user.is_authenticated %}
+                <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
+                {% else %}
+                <p class="navbar-text pull-right"><a href="#">Login or Signup</a></p>
+                {% endif %}
+            </div><!--/.nav-collapse -->
+
+        </div>
     </div>
 </div>
+{{ block.super }}
+{% endblock %}
+
+{% block page_sidebar %}
+sidebar
+{% endblock %}
+
+{% block page_content %}
+content
+{% endblock %}
+
+{% block end_body_js %}
+<script>
+    var map = new L.Map("map", {
+        center: new L.LatLng(21.505, -0.09),
+        zoom: 3
+    });
+
+    var mapQuestUrl = "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
+        mapQuest = new L.TileLayer(mapQuestUrl, {
+            maxZoom: 18,
+            subdomains: "1234",
+            attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">'
+        }),
+        openStreetMapUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        openStreetMap = new L.TileLayer(openStreetMapUrl, {
+            maxZoom: 18,
+            subdomains: "abc",
+            attribution: 'Data, imagery and map information provided by <a href="http://mapquest.com">MapQuest</a>, <a href="http://www.openstreetmap.org">Open Street Map</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.'
+        }),
+        cloudmadeUrl = "http://{s}.tile.cloudmade.com/{{ cloudmade_key }}/997/256/{z}/{x}/{y}.png",
+        cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18});
+
+    map.addLayer(openStreetMap).locateAndSetView(4);
+
+    map.on("viewreset", function(e) {
+        var hi_there = new L.Marker(map.getCenter()),
+            greeting = "<h3>Hi There!</h3><p>If you're not already a member, please sign up!</p>";
+
+        map.addLayer(hi_there);
+        hi_there.bindPopup(greeting).openPopup();
+    });
+</script>
+{% endblock %}
