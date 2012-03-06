@@ -16,27 +16,14 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container-fluid">
-
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
             <a class="brand" href="/"><span class="logo"></span><span class="text">DjangoPeople</span></a>
-            <div class="nav-collapse">
-                <ul class="nav">
-
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                {% if request.user.is_authenticated %}
-                <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
-                {% else %}
-                <p class="navbar-text pull-right"><a href="#">Login or Signup</a></p>
-                {% endif %}
-            </div><!--/.nav-collapse -->
-
+            <div class="span1 offset5">
+                <a class="btn btn-inverse" href="#"><i class="icon-arrow-up icon-white"></i></a>
+            </div>
+            <div class="pull-right">
+                <a href="#" class="btn btn-primary"><i class="icon-user icon-white"></i> Twitter</a>
+                <a href="#" class="btn"><i class="icon-user"></i> Github</a>
+            </div>
         </div>
     </div>
 </div>
@@ -75,12 +62,25 @@ content
 
     map.addLayer(openStreetMap).locateAndSetView(4);
 
-    map.on("viewreset", function(e) {
-        var hi_there = new L.Marker(map.getCenter()),
+    map.on("locationfound", function(e) {
+        var hi_there = new L.Marker(e.latlng),
             greeting = "<h3>Hi There!</h3><p>If you're not already a member, please sign up!</p>";
 
         map.addLayer(hi_there);
         hi_there.bindPopup(greeting).openPopup();
+    });
+
+    $(".navbar a.btn").on("click", function(e) {
+        e.preventDefault();
+        var map_height = $("#map").height();
+        if ($("#map").css("margin-top") === "0px") {
+            $("#map").css("margin-top", (map_height - 50) * -1);
+            $(".navbar i.icon-arrow-up").removeClass("icon-arrow-up").addClass("icon-arrow-down");
+            console.log(map);
+        } else {
+            $("#map").css("margin-top", 0);
+            $(".navbar i.icon-arrow-down").removeClass("icon-arrow-down").addClass("icon-arrow-up");
+        }
     });
 </script>
 {% endblock %}
