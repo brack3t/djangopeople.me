@@ -7,7 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r"^admin/", include(admin.site.urls)),
 
-    url (r"", include("generic.urls")),
+    url(r'', include("generic.urls")),
+    url(r'', include("social_auth.urls")),
 )
 
 urlpatterns += staticfiles_urlpatterns()
