@@ -21,8 +21,8 @@
                 <a class="btn btn-inverse" href="#"><i class="icon-arrow-up icon-white"></i></a>
             </div>
             <div class="pull-right">
-                <a href="#" class="btn btn-primary"><i class="icon-user icon-white"></i> Twitter</a>
-                <a href="#" class="btn"><i class="icon-user"></i> Github</a>
+                <a href="{% url socialauth_begin backend="twitter" %}" class="btn btn-primary"><i class="icon-user icon-white"></i> Twitter</a>
+                <a href="{% url socialauth_begin backend="github" %}" class="btn"><i class="icon-user"></i> Github</a>
             </div>
         </div>
     </div>

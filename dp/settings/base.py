@@ -80,6 +80,12 @@ TEMPLATE_LOADERS = (
     "django.template.loaders.app_directories.Loader",
 )
 
+AUTHENTICATION_BACKENDS = (
+    "social_auth.backends.twitter.TwitterBackend",
+    "social_auth.backends.contrib.github.GithubBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
 MIDDLEWARE_CLASSES = (
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -122,6 +128,7 @@ THIRD_PARTY_APPS = (
     "south",
     "floppyforms",
     "crispy_forms",
+    "social_auth",
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
