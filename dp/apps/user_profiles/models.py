@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.core.validators import RegexValidator
 
+from social_auth.signals import pre_update
+from social_auth.backends.github import GithubBackend
+from social_auth.backends.twitter import TwitterBackend
 from taggit.managers import TaggableManager
 
 
@@ -88,3 +91,24 @@ class Site(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+def github_user_update(sender, user, response, details, **kwargs):
+    import pdb
+    pdb.set_trace()
+
+pre_update.connect(github_user_update, sender=GithubBackend)
+
+def twitter_user_update(sender, user, response, details, **kwargs):
+    profile, create = UserProfile.objects.get_or_create(user=user)
+
+    profile.user.username = response["screen_name"]
+    if create:
+        profile.point = generate_point(lat=0, lng=0)
+    profile.save()
+    user.username = response['screen_name']
+    user.save()
+
+    return True
+
+pre_update.connect(twitter_user_update, sender=TwitterBackend)
