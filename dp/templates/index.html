@@ -13,20 +13,6 @@
 {% endblock %}
 
 {% block content_override %}
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand" href="/"><span class="logo"></span><span class="text">DjangoPeople</span></a>
-            <div class="span1 offset5">
-                <a class="btn btn-inverse" href="#"><i class="icon-arrow-up icon-white"></i></a>
-            </div>
-            <div class="pull-right">
-                <a href="#" class="btn btn-primary"><i class="icon-user icon-white"></i> Twitter</a>
-                <a href="#" class="btn"><i class="icon-user"></i> Github</a>
-            </div>
-        </div>
-    </div>
-</div>
 {{ block.super }}
 {% endblock %}
 
@@ -68,19 +54,6 @@ content
 
         map.addLayer(hi_there);
         hi_there.bindPopup(greeting).openPopup();
-    });
-
-    $(".navbar a.btn").on("click", function(e) {
-        e.preventDefault();
-        var map_height = $("#map").height();
-        if ($("#map").css("margin-top") === "0px") {
-            $("#map").css("margin-top", (map_height - 50) * -1);
-            $(".navbar i.icon-arrow-up").removeClass("icon-arrow-up").addClass("icon-arrow-down");
-            console.log(map);
-        } else {
-            $("#map").css("margin-top", 0);
-            $(".navbar i.icon-arrow-down").removeClass("icon-arrow-down").addClass("icon-arrow-up");
-        }
     });
 </script>
 {% endblock %}

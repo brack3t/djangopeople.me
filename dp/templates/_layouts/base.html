@@ -20,6 +20,17 @@
     <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
     {% block page_header %}{% endblock %}
 
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="/"><span class="logo"></span><span class="text">DjangoPeople</span></a>
+                <div class="pull-right">
+                    <a href="#" class="btn btn-primary"><i class="icon-user icon-white"></i> Twitter</a>
+                    <a href="#" class="btn"><i class="icon-user"></i> Github</a>
+                </div>
+            </div>
+        </div>
+    </div>
     {% block content_override %}
     <div class="container-fluid">
         {% block content %}
