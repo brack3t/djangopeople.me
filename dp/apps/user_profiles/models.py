@@ -3,7 +3,7 @@ from django.contrib.gis.db import models
 from django.core.validators import RegexValidator
 
 from social_auth.signals import pre_update
-from social_auth.backends.github import GithubBackend
+from social_auth.backends.contrib.github import GithubBackend
 from social_auth.backends.twitter import TwitterBackend
 from taggit.managers import TaggableManager
 
