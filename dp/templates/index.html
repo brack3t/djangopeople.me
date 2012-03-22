@@ -21,28 +21,18 @@ content
 {% endblock %}
 
 {% block end_body_js %}
+<script src="http://maps.stamen.com/js/tile.stamen.js"></script>
 <script>
     var map = new L.Map("map", {
         center: new L.LatLng(21.505, -0.09),
         zoom: 3
     });
 
-    var mapQuestUrl = "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
-        mapQuest = new L.TileLayer(mapQuestUrl, {
-            maxZoom: 18,
-            subdomains: "1234",
-            attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">'
-        }),
-        openStreetMapUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        openStreetMap = new L.TileLayer(openStreetMapUrl, {
-            maxZoom: 18,
-            subdomains: "abc",
-            attribution: 'Data, imagery and map information provided by <a href="http://mapquest.com">MapQuest</a>, <a href="http://www.openstreetmap.org">Open Street Map</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.'
-        }),
-        cloudmadeUrl = "http://{s}.tile.cloudmade.com/{{ cloudmade_key }}/997/256/{z}/{x}/{y}.png",
-        cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18});
+    var stamenLayer = new L.StamenTileLayer("watercolor", {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+        });
 
-    map.addLayer(openStreetMap).locateAndSetView(4);
+    map.addLayer(stamenLayer).locateAndSetView(4);
 
     map.on("locationfound", function(e) {
         var hi_there = new L.Marker(e.latlng),
