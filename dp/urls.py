@@ -7,6 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r"^admin/", include(admin.site.urls)),
 
+    url(r"^profile/", include("user_profiles.urls", namespace="profiles",
+        app_name="user_profiles")),
     url(r'', include("generic.urls")),
     url(r'', include("social_auth.urls")),
 )

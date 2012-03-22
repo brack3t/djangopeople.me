@@ -125,13 +125,19 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    "south",
-    "floppyforms",
     "crispy_forms",
+    "django_gravatar",
+    "floppyforms",
     "social_auth",
+    "south",
+    "taggit",
 )
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
+LOCAL_APPS = (
+    "user_profiles",
+)
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
