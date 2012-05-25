@@ -73,6 +73,18 @@ class UserProfile(models.Model):
         return None
 
 
+class Site(models.Model):
+    user = models.ForeignKey(User, related_name="sites")
+    domain = models.CharField(max_length=255,
+        help_text="Include http(s)://")
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True,
+        help_text="Describe your involvement with the project.")
+
+    def __unicode__(self):
+        return self.name
+
+
 def github_user_update(sender, user, response, details, **kwargs):
     profile, create = UserProfile.objects.get_or_create(user=user)
 
