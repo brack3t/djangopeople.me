@@ -25,6 +25,22 @@ DATABASES = {
     }
 }
 
+# Social Auth
+TWITTER_CONSUMER_KEY = ""
+TWITTER_CONSUMER_SECRET = ""
+
+GITHUB_APP_ID = ""
+GITHUB_API_SECRET = ""
+
+SOCIAL_AUTH_ERROR_KEY = "social_errors"
+SOCIAL_AUTH_COMPLETE_URL_NAME = "socialauth_complete"
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = "socialauth_associate_complete"
+SOCIAL_AUTH_DEFAULT_USERNAME = "new_social_auth_user"
+SOCIAL_AUTH_EXTRA_DATA = False
+
+LOGIN_REDIRECT_URL = "/profile/"
+LOGIN_URL = "/login/"
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -101,13 +117,19 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
 )
 
+AUTHENTICATION_BACKENDS = (
+    "social_auth.backends.twitter.TwitterBackend",
+    "social_auth.backends.contrib.github.GithubBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
 ROOT_URLCONF = "dp.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "dp.wsgi.application"
 
 TEMPLATE_DIRS = (
-    root("templates")
+    root("..", "templates")
 )
 
 DJANGO_APPS = (
@@ -118,15 +140,21 @@ DJANGO_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
+    "django.contrib.gis",
 )
 
 THIRD_PARTY_APPS = (
     "south",
     "floppyforms",
     "crispy_forms",
+    "social_auth",
+    "taggit",
 )
 
-OUR_APPS = ()
+OUR_APPS = (
+    "generic",
+    "profiles",
+)
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + OUR_APPS
 
