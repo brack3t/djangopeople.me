@@ -149,6 +149,7 @@ THIRD_PARTY_APPS = (
     "crispy_forms",
     "social_auth",
     "taggit",
+    "braces",
 )
 
 OUR_APPS = (
