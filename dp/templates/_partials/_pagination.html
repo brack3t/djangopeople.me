@@ -1,0 +1,18 @@
+{% if is_paginated %}
+<div class="pagination">
+    <ul>
+        <li class="prev{% if not page_obj.has_previous %} disabled{% endif %}">
+            <a href="?page={{ page_obj.previous_page_number }}{% for k,v in request.GET.items %}{% if not k == "page" %}&{{ k }}={{ v }}{% endif %}{% endfor %}">&larr; Previous</a>
+        </li>
+
+        {% for pg_num in paginator.page_range %}
+        <li{% if pg_num == page_obj.number %} class="active"{% endif %}>
+            <a href="?page={{ pg_num }}{% for k,v in request.GET.items %}{% if not k == "page" %}&{{ k }}={{ v }}{% endif %}{% endfor %}">{{ pg_num }}</a></li>
+        {% endfor %}
+
+        <li class="next{% if not page_obj.has_next %} disabled{% endif %}">
+            <a href="?page={{ page_obj.next_page_number }}{% for k,v in request.GET.items %}{% if not k == "page" %}&{{ k }}={{ v }}{% endif %}{% endfor %}">Next &rarr;</a>
+        </li>
+    </ul>
+</div>
+{% endif %}

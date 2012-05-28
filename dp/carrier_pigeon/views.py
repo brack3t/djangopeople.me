@@ -11,6 +11,7 @@ from carrier_pigeon.models import Message
 class InboxListView(LoginRequiredMixin, SetHeadlineMixin, ListView):
     headline = "Inbox"
     model = Message
+    paginate_by = 30
     template_name = "carrier_pigeon/list.html"
 
     def get_queryset(self):
