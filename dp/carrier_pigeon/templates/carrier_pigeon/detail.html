@@ -1,4 +1,5 @@
 {% extends "carrier_pigeon/base.html" %}
+{% load humanize %}
 
 {% block page_header %}
     {{ block.super }}
@@ -12,17 +13,20 @@
             <dt>From</dt>
             <dd>{% firstof object.sender.get_full_name object.sender.username object.anonymous_message_display %}</dd>
             <dt>Date Sent</dt>
-            <dd><time datetime="{{ object.sent_at }}">{{ object.sent_at }}</time></dd>
+            <dd><time datetime="{{ object.sent_at }}">{{ object.sent_at|naturalday }} at {{ object.sent_at|naturaltime }}</time></dd>
             <dt>Date Read</dt>
-            <dd><time datetime="{{ object.read_at }}">{{ object.read_at }}</time></dd>
+            <dd><time datetime="{{ object.read_at }}">{{ object.read_at|naturalday }} at {{ object.read_at|naturaltime }}</time></dd>
             {% if object.replied_at %}
             <dt>Date Replied</dt>
-            <dd><time datetime="{{ object.replied_at }}">{{ object.replied_at }}</time></dd>
+            <dd><time datetime="{{ object.replied_at }}">{{ object.replied_at|naturalday }} at {{ object.replied_at|naturaltime }}</time></dd>
             {% endif %}
         </dl>
     </div>
     <div class="span10">
-        {{ message.body }}
+        <dl>
+            <dt>Message</dt>
+            <dd>{{ message.body }}</dd>
+        </dl>
     </div>
 </div>
 {% endblock %}

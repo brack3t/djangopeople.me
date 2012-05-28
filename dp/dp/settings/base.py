@@ -147,6 +147,7 @@ DJANGO_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.contrib.gis",
+    "django.contrib.humanize",
 )
 
 THIRD_PARTY_APPS = (
