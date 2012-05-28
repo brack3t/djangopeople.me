@@ -161,14 +161,13 @@ THIRD_PARTY_APPS = (
     "braces",
     "crispy_forms",
     "floppyforms",
-    "pagination",
-    "postman",
     "social_auth",
     "south",
     "taggit",
 )
 
 OUR_APPS = (
+    "carrier_pigeon",
     "generic",
     "profiles",
 )
