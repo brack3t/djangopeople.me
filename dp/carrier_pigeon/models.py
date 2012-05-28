@@ -11,6 +11,7 @@ class Message(models.Model):
     sender = models.ForeignKey(User, blank=True, null=True,
         related_name="sent_messages")
     recipient = models.ForeignKey(User, related_name="received_messages")
+    name = models.CharField(max_length=75, blank=True)
     email = models.EmailField(blank=True)
     sent_at = models.DateTimeField(auto_now_add=True)
     read_at = models.DateTimeField(blank=True, null=True)
@@ -32,3 +33,7 @@ class Message(models.Model):
     @property
     def is_replied(self):
         return self.replied_at is not None
+
+    @property
+    def anonymous_message_display(self):
+        return u"%s &lt;%s&gt;" % (self.name, self.email)

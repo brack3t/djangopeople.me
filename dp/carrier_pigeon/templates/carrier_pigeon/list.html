@@ -14,14 +14,14 @@
     <tbody>
         {% for message in object_list %}
         <tr>
-            <td class="messages-from">{% firstof message.sender.get_full_name message.sender.username message.email %}</td>
+            <td class="messages-from">{% firstof message.sender.get_full_name message.sender.username message.anonymous_message_display %}</td>
             <td class="messages-subject">{{ message.subject|truncatewords:15 }}</td>
             <td class="messages-date"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
             <td class="messages-tools"></td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5">No messages yet.</td>
+            <td colspan="4">No messages yet.</td>
         </tr>
         {% endfor %}
     </tbody>
