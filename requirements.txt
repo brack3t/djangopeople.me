@@ -10,4 +10,5 @@ mock==0.8.0
 oauth2==1.5.211
 psycopg2==2.4.5
 python-openid==2.2.5
+requests==0.12.1
 wsgiref==0.1.2
