@@ -16,6 +16,7 @@
     <!-- Included CSS Files -->
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/dp.css">
+    {% block extra_css %}{% endblock %}
 
     <script src="{{ STATIC_URL }}js/modernizr.min.js"></script>
 
@@ -46,7 +47,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
+        {% block page_container %}
         <div class="hero-unit">
             <h1>Hello, world!</h1>
         </div>
@@ -64,6 +66,7 @@
                 <p>something</p>
             </div>
         </div>
+        {% endblock %}
 
         <footer>
             <p>&copy; Brack3t.</p>
@@ -85,5 +88,6 @@
     <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

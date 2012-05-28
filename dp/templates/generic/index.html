@@ -1,1 +1,15 @@
 {% extends "_layouts/base.html" %}
+
+{% block extra_css %}
+    {% include "_partials/_map_includes.html" %}
+{% endblock %}
+
+{% block page_container %}
+    <div id="mapContainer" class="row-fluid">
+        <div class="span12" id="map">Nothing here</div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {% include "_partials/_map.html" %}
+{% endblock %}

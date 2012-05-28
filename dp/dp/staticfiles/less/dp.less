@@ -8,9 +8,14 @@
 @vintageCream: rgba(241, 228, 191, 1);
 
 html, body {
-    background: @grayDarker;
-    color: @white;
-    font-size: 16px;
-    padding-top: 60px;
+    background: lighten(@vintageCream, 10%);
+    color: @grayDarker;
+    padding-top: 20px;
     padding-bottom: 40px;
+}
+
+#mapContainer {
+    #map {
+        height: 600px;
+    }
 }
