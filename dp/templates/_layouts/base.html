@@ -36,13 +36,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/">DjangoPeople.me</a>
+                <a class="brand" href="{% url home %}">DjangoPeople.me</a>
                 <nav class="nav-collapse">
                     <ul class="nav">
-                        <li class="active"><a href="/">Home</a></li>
-						{% if request.user.is_authenticated %}
-						<li><a href="">Messages</a></li>
-						{% endif %}
+                        <li class="active"><a href="{% url home %}">Home</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="">Messages</a></li>
+                        {% endif %}
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -61,7 +61,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
-                                    <li><a href="#"><i class="icon-signout"></i> Sign out</a></li>
+                                    <li><a href="{% url logout %}"><i class="icon-signout"></i> Sign out</a></li>
                                 </ul>
                             </li>
                         </ul>
