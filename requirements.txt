@@ -13,3 +13,4 @@ psycopg2==2.4.5
 python-openid==2.2.5
 requests==0.12.1
 wsgiref==0.1.2
+pytz==2012c
