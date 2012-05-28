@@ -1,6 +1,6 @@
 {% extends "_layouts/base.html" %}
 
-{% block page_title %}{{ object.get_full_name }} &bull; {{ block.super }}{% endblock %}
+{% block page_title %}{% firstof object.get_full_name object.username %} &bull; {{ block.super }}{% endblock %}
 
 {% block page_container %}
 <div class="page-header">
