@@ -39,12 +39,19 @@
                 <a class="brand" href="{% url home %}">DjangoPeople.me</a>
                 <nav class="nav-collapse">
                     <ul class="nav">
-                        <li class="active"><a href="{% url home %}">Home</a></li>
+                        <li class="{% block home_nav_class %}{% endblock %}"><a href="{% url home %}">Home</a></li>
                         {% if request.user.is_authenticated %}
-                        <li><a href="{% url pigeon:inbox %}">Messages</a></li>
+                        <li class="dropdown {% block messages_nav_class %}{% endblock %}" id="messagesMenu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#messagesMenu">
+                                <i class="icon-envelope"></i> Messages <i class="icon-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url pigeon:inbox %}">Inbox</a></li>
+                                <li><a href="{% url pigeon:archive %}">Archive</a></li>
+                            </ul>
+                        </li>
                         {% endif %}
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li class="{% block about_nav_class %}{% endblock %}"><a href="#">About</a></li>
+                        <li class="{% block contact_nav_class %}{% endblock %}"><a href="#">Contact</a></li>
                     </ul>
                     <div class="pull-right">
                     {% if not user.is_authenticated %}
@@ -55,7 +62,7 @@
                         </ul>
                     {% else %}
                         <ul class="nav pull-right">
-                            <li class="dropdown" id="profileMenu">
+                            <li class="dropdown {% block profile_nav_class %}{% endblock %}" id="profileMenu">
                                 <a class="drodown-toggle" data-toggle="dropdown" href="#profileMenu">
                                     {% firstof user.get_full_name user.username %} <i class="icon-chevron-down"></i></a>
 

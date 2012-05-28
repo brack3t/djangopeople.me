@@ -2,6 +2,8 @@
 
 {% block page_title %}{% firstof object.get_full_name object.username %} &bull; {{ block.super }}{% endblock %}
 
+{% block profile_nav_class %}active{% endblock %}
+
 {% block page_container %}
 <div class="page-header">
     {% block page_header %}
