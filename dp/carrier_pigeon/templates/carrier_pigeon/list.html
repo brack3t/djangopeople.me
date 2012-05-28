@@ -1,24 +1,23 @@
 {% extends "carrier_pigeon/base.html" %}
+{% load tz %}
 
 {% block page_content %}
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th></th>
-            <th>From</th>
-            <th>Date Sent</th>
-            <th>Subject</th>
-            <th></th>
+            <th class="messages-from">From</th>
+            <th class="messages-subject">Subject</th>
+            <th class="messagse-date">Date Sent</th>
+            <th class="messages-tools"></th>
         </tr>
     </thead>
     <tbody>
         {% for message in object_list %}
         <tr>
-            <td></td>
-            <td>{% firstof message.sender.get_full_name message.sender.username message.email %}</td>
-            <td>{{ message.sent_at }}</td>
-            <td>{{ message.subject|truncatewords:15 }}</td>
-            <td></td>
+            <td class="messages-from">{% firstof message.sender.get_full_name message.sender.username message.email %}</td>
+            <td class="messages-subject">{{ message.subject|truncatewords:15 }}</td>
+            <td class="messages-date"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
+            <td class="messages-tools"></td>
         </tr>
         {% empty %}
         <tr>
