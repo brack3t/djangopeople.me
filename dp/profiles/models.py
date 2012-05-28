@@ -34,6 +34,8 @@ class UserProfile(models.Model):
         validators=[RegexValidator(r"^[\w-]{1,15}$")])
     linkedin_username = models.CharField(max_length=30, blank=True,
         validators=[RegexValidator(r"^\w{5,30}$")])
+    anonymous_messages = models.BooleanField(default=False,
+        help_text="Would you like to receive messages from anonymous users?")
     objects = models.GeoManager()
 
     def __unicode__(self):
