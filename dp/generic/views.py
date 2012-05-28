@@ -16,7 +16,7 @@ class LogoutView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
-        return reverse("cms_login")
+        return reverse("home")
 
     def get(self, request, *args, **kwargs):
         logout(request)
