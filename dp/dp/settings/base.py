@@ -41,6 +41,12 @@ SOCIAL_AUTH_EXTRA_DATA = False
 LOGIN_REDIRECT_URL = "/profile/"
 LOGIN_URL = "/login/"
 
+POSTMAN_DISALLOW_ANONYMOUS = False
+POSTMAN_DISALLOW_MULTIRECIPIENTS = True
+POSTMAN_DISALLOW_COPIES_ON_REPLY = True
+POSTMAN_AUTO_MODERATE_AS = True
+POSTMAN_NOTIFIER_APP = None
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -115,6 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    "postman.context_processors.inbox",
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -144,12 +151,13 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    "south",
-    "floppyforms",
-    "crispy_forms",
-    "social_auth",
-    "taggit",
     "braces",
+    "crispy_forms",
+    "floppyforms",
+    "postman",
+    "social_auth",
+    "south",
+    "taggit",
 )
 
 OUR_APPS = (
