@@ -15,7 +15,7 @@
         {% for message in object_list %}
         <tr>
             <td></td>
-            <td>{% firstof message.sender.get_full_name message.sender.username %}</td>
+            <td>{% firstof message.sender.get_full_name message.sender.username message.email %}</td>
             <td>{{ message.sent_at }}</td>
             <td>{{ message.subject|truncatewords:15 }}</td>
             <td></td>
