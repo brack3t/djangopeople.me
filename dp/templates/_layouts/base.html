@@ -41,7 +41,7 @@
                     <ul class="nav">
                         <li class="active"><a href="{% url home %}">Home</a></li>
 						{% if request.user.is_authenticated %}
-						<li><a href="{% url pigeon:home %}">Messages</a></li>
+						<li><a href="{% url pigeon:inbox %}">Messages</a></li>
 						{% endif %}
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
