@@ -33,3 +33,7 @@ class Message(models.Model):
     @property
     def is_replied(self):
         return self.replied_at is not None
+
+    @property
+    def anonymous_message_display(self):
+        return u"%s &lt;%s&gt;" % (self.name, self.email)
