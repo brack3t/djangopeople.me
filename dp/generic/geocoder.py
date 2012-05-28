@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.gis.geos import *
 from django.core.exceptions import ImproperlyConfigured
 from django.utils import simplejson as json
 from django.utils.http import urlquote
@@ -22,7 +21,7 @@ class Geocoder(object):
         if not location:
             return {"error": "No location was received.", "status": False}
 
-        result = requests.get(self.mapquest_api_url + "&location=%s" & (
+        result = requests.get(self.mapquest_api_url + "&location=%s" % (
             urlquote(location)))
 
         if result.status_code == 200:
