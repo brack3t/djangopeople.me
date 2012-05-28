@@ -6,10 +6,3 @@ class HomePageView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return self.render_to_response({})
-
-
-class ProfileView(TemplateView):
-    template_name = "profile.html"
-
-    def get(self, request, *args, **kwargs):
-        return self.render_to_response({"user": request.user})

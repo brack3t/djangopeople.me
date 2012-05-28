@@ -26,7 +26,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body class="{% block body_class %}standard-page{% endblock %}">
     <!-- container -->
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -43,6 +43,27 @@
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
+                    <div class="pull-right">
+                    {% if not user.is_authenticated %}
+                        <p class="navbar-label pull-left">Sign in with: </p>
+                        <ul class="nav pull-right">
+                            <li><a href="{% url socialauth_begin "twitter" %}"><i class="icon-twitter-sign"></i> Twitter</a></li>
+                            <li><a href="{% url socialauth_begin "github" %}"><i class="icon-github-sign"></i> Github</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav pull-right">
+                            <li class="dropdown" id="profileMenu">
+                                <a class="drodown-toggle" data-toggle="dropdown" href="#profileMenu">
+                                    {{ user.get_full_name }} <i class="icon-chevron-down"></i></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
+                                    <li><a href="#"><i class="icon-signout"></i> Sign out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% endif %}
+                    </div>
                 </nav>
             </div>
         </div>

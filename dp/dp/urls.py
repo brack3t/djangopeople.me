@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from generic.views import HomePageView, ProfileView
+from generic.views import HomePageView
+from profiles.views import ProfileView
 
 admin.autodiscover()
 
