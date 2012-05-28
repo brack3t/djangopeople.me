@@ -7,17 +7,22 @@
 @vintageBlue: rgba(62, 160, 192, 1);
 @vintageCream: rgba(241, 228, 191, 1);
 
-html, body {
+body {
     background: lighten(@vintageCream, 10%);
     color: @grayDarker;
-    padding-top: 20px;
-    padding-bottom: 40px;
 }
 
 #mapContainer {
     margin-bottom: 20px;
+    margin-top: 40px;
 
     #map {
         height: 600px;
+    }
+}
+
+@media (max-width: 979px) {
+    #mapContainer {
+        margin: -18px -20px 20px -20px;
     }
 }
