@@ -47,6 +47,12 @@ POSTMAN_DISALLOW_COPIES_ON_REPLY = True
 POSTMAN_AUTO_MODERATE_AS = True
 POSTMAN_NOTIFIER_APP = None
 
+EMAIL_USE_TLS = False
+EMAIL_HOST = "localhost"
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 1025
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
