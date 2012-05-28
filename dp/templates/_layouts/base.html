@@ -40,9 +40,9 @@
                 <nav class="nav-collapse">
                     <ul class="nav">
                         <li class="active"><a href="{% url home %}">Home</a></li>
-						{% if request.user.is_authenticated %}
-						<li><a href="{% url pigeon:inbox %}">Messages</a></li>
-						{% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url pigeon:inbox %}">Messages</a></li>
+                        {% endif %}
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -57,7 +57,7 @@
                         <ul class="nav pull-right">
                             <li class="dropdown" id="profileMenu">
                                 <a class="drodown-toggle" data-toggle="dropdown" href="#profileMenu">
-                                    {{ user.get_full_name }} <i class="icon-chevron-down"></i></a>
+                                    {% firstof user.get_full_name user.username %} <i class="icon-chevron-down"></i></a>
 
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>

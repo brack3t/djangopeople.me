@@ -1,0 +1,30 @@
+{% extends "carrier_pigeon/base.html" %}
+
+{% block page_content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>From</th>
+            <th>Date Sent</th>
+            <th>Subject</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for message in object_list %}
+        <tr>
+            <td></td>
+            <td>{% firstof message.sender.get_full_name message.sender.username %}</td>
+            <td>{{ message.sent_at }}</td>
+            <td>{{ message.subject|truncate_words: 15 }}</td>
+            <td></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No messages yet. <a href="#">View Archived Messages</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
