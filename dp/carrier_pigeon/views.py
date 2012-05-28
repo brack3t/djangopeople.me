@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.views.generic import ListView, DetailView
+from django.utils.timezone import utc
 
 from braces.views import LoginRequiredMixin, SetHeadlineMixin
 
@@ -37,3 +40,15 @@ class MessageDetailView(LoginRequiredMixin, SetHeadlineMixin, DetailView):
 
     def get_headline(self):
         return u"Set This Shit"
+
+    def get_object(self):
+        """
+        Set read_at if this is the first time viewing a message.
+        """
+        obj = super(MessageDetailView, self).get_object()
+
+        if not obj.read_at:
+            obj.read_at = datetime.utcnow().replace(tzinfo=utc)
+            obj.save()
+
+        return obj
