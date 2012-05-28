@@ -41,12 +41,6 @@ SOCIAL_AUTH_EXTRA_DATA = False
 LOGIN_REDIRECT_URL = "/profile/"
 LOGIN_URL = "/login/"
 
-POSTMAN_DISALLOW_ANONYMOUS = False
-POSTMAN_DISALLOW_MULTIRECIPIENTS = True
-POSTMAN_DISALLOW_COPIES_ON_REPLY = True
-POSTMAN_AUTO_MODERATE_AS = True
-POSTMAN_NOTIFIER_APP = None
-
 EMAIL_USE_TLS = False
 EMAIL_HOST = "localhost"
 EMAIL_HOST_USER = ''
@@ -127,7 +121,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
-    "postman.context_processors.inbox",
 )
 
 AUTHENTICATION_BACKENDS = (
