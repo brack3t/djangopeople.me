@@ -110,6 +110,7 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "pagination.middleware.PaginationMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 )
 
@@ -154,6 +155,7 @@ THIRD_PARTY_APPS = (
     "braces",
     "crispy_forms",
     "floppyforms",
+    "pagination",
     "postman",
     "social_auth",
     "south",
