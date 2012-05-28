@@ -12,6 +12,19 @@ body {
     color: @grayDarker;
 }
 
+.navbar {
+    .brand {
+        display: none;
+    }
+
+    .navbar-label {
+        color: @grayLighter;
+        font-weight: bold;
+        line-height: @baseLineHeight;
+        padding-top: 9px;
+    }
+}
+
 #mapContainer {
     margin-bottom: 20px;
     margin-top: 40px;
@@ -22,6 +35,10 @@ body {
 }
 
 @media (max-width: 979px) {
+    .navbar .brand {
+        display: block;
+        float: left;
+    }
     #mapContainer {
         margin: -18px -20px 20px -20px;
     }
