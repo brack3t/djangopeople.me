@@ -47,26 +47,9 @@
             </div>
         </div>
     </div>
+    {% block pre_content %}{% endblock %}
     <div class="container-fluid">
-        {% block page_container %}
-        <div class="hero-unit">
-            <h1>Hello, world!</h1>
-        </div>
-        <div class="row-fluid">
-            <div class="span4">
-                <h2>Heading</h2>
-                <p>something</p>
-            </div>
-            <div class="span4">
-                <h2>Heading</h2>
-                <p>something</p>
-            </div>
-            <div class="span4">
-                <h2>Heading</h2>
-                <p>something</p>
-            </div>
-        </div>
-        {% endblock %}
+        {% block page_container %}{% endblock %}
 
         <footer>
             <p>&copy; Brack3t.</p>
