@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from braces.views import LoginRequiredMixin, SetHeadlineMixin
 
@@ -29,3 +29,11 @@ class ArchiveListView(InboxListView):
         return self.request.user.received_messages.filter(
             recipient_archived=True
         )
+
+
+class MessageDetailView(LoginRequiredMixin, SetHeadlineMixin, DetailView):
+    model = Message
+    template_name = "carrier_pigeon/detail.html"
+
+    def get_headline(self):
+        return u"Set This Shit"
