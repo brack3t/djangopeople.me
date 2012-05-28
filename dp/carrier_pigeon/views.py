@@ -1,11 +1,12 @@
 from django.views.generic import ListView
 
-from braces.views import LoginRequiredMixin
+from braces.views import LoginRequiredMixin, SetHeadlineMixin
 
 from carrier_pigeon.models import Message
 
 
-class InboxListView(LoginRequiredMixin, ListView):
+class InboxListView(LoginRequiredMixin, SetHeadlineMixin, ListView):
+    headline = "Inbox"
     model = Message
     template_name = "carrier_pigeon/list.html"
 
@@ -19,6 +20,7 @@ class InboxListView(LoginRequiredMixin, ListView):
 
 
 class ArchiveListView(InboxListView):
+    headline = "Archive"
 
     def get_queryset(self):
         """
