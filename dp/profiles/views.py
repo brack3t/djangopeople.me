@@ -1,7 +1,16 @@
-from django.views.generic import TemplateView
+from django.views.generic import DetailView
 
-class ProfileView(TemplateView):
-    template_name = "profiles/mine.html"
+from profiles.models import UserProfile
 
-    def get(self, request, *args, **kwargs):
-        return self.render_to_response({"object": request.user})
+
+class ProfileView(DetailView):
+    model = UserProfile
+    slug_field = "user__username"
+    template_name = "profiles/detail.html"
+
+
+#class ProfileView(TemplateView):
+    #template_name = "profiles/mine.html"
+
+    #def get(self, request, *args, **kwargs):
+        #return self.render_to_response({"object": request.user})
