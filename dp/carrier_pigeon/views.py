@@ -35,12 +35,9 @@ class ArchiveListView(InboxListView):
         )
 
 
-class MessageDetailView(LoginRequiredMixin, SetHeadlineMixin, DetailView):
+class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
     template_name = "carrier_pigeon/detail.html"
-
-    def get_headline(self):
-        return u"Set This Shit"
 
     def get_object(self):
         """
