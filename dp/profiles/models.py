@@ -19,12 +19,12 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     location = models.CharField(
         blank=True,
-        help_text="What you'd like others to see your location as.",
+        help_text=u"What you'd like others to see your location as.",
         max_length=255)
     available_for = models.PositiveSmallIntegerField(default=0,
         choices=AVAILABLE_FOR)
     point = models.PointField(blank=True, editable=False, null=True)
-    bio = models.TextField(blank=True, help_text="Tell us a bit about you.")
+    bio = models.TextField(blank=True, help_text=u"Tell us a bit about you.")
     tags = TaggableManager(blank=True)
     github_username = models.CharField(blank=True, max_length=40,
         validators=[RegexValidator(r"^[\w-]{1,40}$")])
@@ -35,7 +35,9 @@ class UserProfile(models.Model):
     linkedin_username = models.CharField(max_length=30, blank=True,
         validators=[RegexValidator(r"^\w{5,30}$")])
     anonymous_messages = models.BooleanField(default=False,
-        help_text="Would you like to receive messages from anonymous users?")
+        help_text=u"Would you like to receive messages from anonymous users?")
+    gravatar_email = models.EmailField(blank=True,
+        help_text=u"The email address associated with your desired gravatar.")
     objects = models.GeoManager()
 
     def __unicode__(self):
@@ -78,10 +80,10 @@ class UserProfile(models.Model):
 class Site(models.Model):
     user = models.ForeignKey(User, related_name="sites")
     domain = models.CharField(max_length=255,
-        help_text="Include http(s)://")
+        help_text=u"Include http(s)://")
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True,
-        help_text="Describe your involvement with the project.")
+        help_text=u"Describe your involvement with the project.")
 
     def __unicode__(self):
         return self.name
