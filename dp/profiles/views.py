@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.views.generic import DetailView, UpdateView
 
 from braces.views import LoginRequiredMixin
@@ -19,9 +18,4 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "profiles/form.html"
 
     def get_object(self, queryset=None):
-        try:
-            obj = UserProfile.objects.select_related("user").get(
-                user__username=self.kwargs["slug"])
-        except UserProfile.DoesNotExist:
-            raise Http404
-        return obj
+        return self.request.user.userprofile
