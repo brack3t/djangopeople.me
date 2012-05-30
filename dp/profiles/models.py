@@ -76,6 +76,16 @@ class UserProfile(models.Model):
             return u"http://linkedin.com/in/%s" % self.linkedin_username
         return None
 
+    @property
+    def gravatar(self):
+        if self.gravatar_email:
+            return self.gravatar_email
+
+        if self.user.email:
+            return self.user.email
+
+        return "djangopeople@example.com"
+
 
 class Site(models.Model):
     user = models.ForeignKey(User, related_name="sites")
