@@ -82,6 +82,16 @@
     </div>
     {% block pre_content %}{% endblock %}
     <div class="container-fluid">
+        {% if messages %}
+        <div class="messages" id="messagesContainer">
+            {% for message in messages %}
+            <div class="fade in alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block page_container %}{% endblock %}
 
         <footer>

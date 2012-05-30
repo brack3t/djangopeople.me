@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, UpdateView
 
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
@@ -19,3 +21,18 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user.userprofile
+
+    def get_success_url(self):
+        return reverse("profile:edit")
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+        user = self.request.user
+        user.first_name = data.get("first_name", user.first_name)
+        user.username = data.get("username", user.username)
+        user.email = data.get("email", None)
+        user.save()
+
+        messages.success(self.request, "Your profile has been updated.")
+
+        return super(ProfileUpdateView, self).form_valid(form)
