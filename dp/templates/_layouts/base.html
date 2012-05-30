@@ -67,10 +67,10 @@
                                     {% firstof user.get_full_name user.username %} <i class="icon-chevron-down"></i></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
-                                    <li>
-                                        <a href="{% url profile:detail request.user.username %}">
-                                            <i class="icon-user"></i>View Public Profile</a></li>
+                                    <li><a href="{% url profile:edit request.user.username %}">
+                                        <i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
+                                    <li><a href="{% url profile:detail request.user.username %}">
+                                        <i class="icon-user"></i>View Public Profile</a></li>
                                     <li><a href="{% url logout %}"><i class="icon-signout"></i> Sign out</a></li>
                                 </ul>
                             </li>

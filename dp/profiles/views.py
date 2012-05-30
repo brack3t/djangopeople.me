@@ -1,5 +1,9 @@
-from django.views.generic import DetailView
+from django.http import Http404
+from django.views.generic import DetailView, UpdateView
 
+from braces.views import LoginRequiredMixin
+
+from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 
 
@@ -9,8 +13,15 @@ class ProfileView(DetailView):
     template_name = "profiles/detail.html"
 
 
-#class ProfileView(TemplateView):
-    #template_name = "profiles/mine.html"
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = UserProfileForm
+    model = UserProfile
+    template_name = "profiles/form.html"
 
-    #def get(self, request, *args, **kwargs):
-        #return self.render_to_response({"object": request.user})
+    def get_object(self, queryset=None):
+        try:
+            obj = UserProfile.objects.select_related("user").get(
+                user__username=self.kwargs["slug"])
+        except UserProfile.DoesNotExist:
+            raise Http404
+        return obj
