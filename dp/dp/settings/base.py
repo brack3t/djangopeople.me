@@ -153,6 +153,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     "braces",
     "crispy_forms",
+    "django_gravatar",
     "floppyforms",
     "social_auth",
     "south",
