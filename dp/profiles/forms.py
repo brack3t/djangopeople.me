@@ -23,6 +23,7 @@ class UserProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
+        self.helper.form_method = "POST"
         self.helper.layout = Layout(
             Div(
                 Fieldset("Personal Details",
