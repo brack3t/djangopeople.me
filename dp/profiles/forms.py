@@ -7,7 +7,7 @@ from profiles.models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     username = forms.RegexField(label="Username", max_length=30,
-        regex=r'^[\w.@+-]+$', help_text="30 characters or fewer. "
+        regex=r"^[\w.@+-]+$", help_text="30 characters or fewer. "
         "Letters, digits and @/./+/-/_ only.",
         error_messages = {
             "invalid": "This value may contain only letters, numbers and "
@@ -48,7 +48,7 @@ class UserProfileForm(forms.ModelForm):
                 css_class="row-fluid"
             ),
             FormActions(
-                Submit("save", "Save", css_class="bttn btn-success"),
+                Submit("save", "Save", css_class="btn btn-success"),
             )
         )
         super(UserProfileForm, self).__init__(*args, **kwargs)

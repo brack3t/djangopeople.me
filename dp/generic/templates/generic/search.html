@@ -1,0 +1,19 @@
+{% extends "_layouts/map.html" %}
+{% load crispy_forms_tags %}
+
+{% block home_nav_class %}active{% endblock %}
+
+{% block page_content %}
+<h1>HOLA!</h1>
+{% crispy form %}
+
+
+<h1>{{ users }}</h1>
+{% for user in users %}
+	{% if units == "mi" %}
+		<p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
+	{% else %}
+		<p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
+	{% endif %}
+{% endfor %}
+{% endblock %}
