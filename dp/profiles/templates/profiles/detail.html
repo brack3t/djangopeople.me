@@ -1,20 +1,33 @@
 {% extends "profiles/base.html" %}
-{% load gravatar %}
+{% load gravatar taggit_extras %}
 
 {% block page_content %}
 <div class="row-fluid">
-	{% gravatar object.gravatar 150 %}
     <div class="span4">
-        <h2>Heading</h2>
-        <p>something</p>
+        <h2>A bit about me</h2>
+        {{ object.bio|linebreaks }}
+        <p>Currently, I'm looking for: <strong>{{ object.get_available_for_display }}</strong></p>
+        <p>I describe myself as: <strong>{{ object.tags.all|join:"</strong>, <strong>" }}</strong></p>
     </div>
     <div class="span4">
-        <h2>Heading</h2>
-        <p>something</p>
+        <h3>You can find me at:</h3>
+        <ul class="unstyled">
+        {% if object.github_username %}
+            <li><i class="icon-github-sign icon-large"></i> <a href="{{ object.github_url }}">Github</a></li>
+        {% endif %}
+        {% if object.bitbucket_username %}
+            <li><i class="icon-external-link icon-large"></i> <a href="{{ object.bitbucket_url }}">Bitbucket</a></li>
+        {% endif %}
+        {% if object.twitter_username %}
+            <li><i class="icon-twitter-sign icon-large"></i> <a href="{{ object.twitter_url }}">Twitter</a></li>
+        {% endif %}
+        {% if object.linkedin_username %}
+            <li><i class="icon-linkedin-sign icon-large"></i> <a href="{{ object.linkedin_url }}">LinkedIn</a></li>
+        {% endif %}
+        </ul>
     </div>
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>something</p>
+    <div class="span2">
+        {% gravatar object.gravatar 150 %}
     </div>
 </div>
 {% endblock %}

@@ -158,6 +158,7 @@ THIRD_PARTY_APPS = (
     "social_auth",
     "south",
     "taggit",
+    "taggit_templatetags",
 )
 
 OUR_APPS = (

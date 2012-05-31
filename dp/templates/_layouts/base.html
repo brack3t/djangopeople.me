@@ -1,3 +1,4 @@
+{% load gravatar %}
 <!DOCTYPE html>
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -64,7 +65,8 @@
                         <ul class="nav pull-right">
                             <li class="dropdown {% block profile_nav_class %}{% endblock %}" id="profileMenu">
                                 <a class="drodown-toggle" data-toggle="dropdown" href="#profileMenu">
-                                    {% firstof user.get_full_name user.username %} <i class="icon-chevron-down"></i></a>
+                                    {% gravatar user.userprofile.gravatar 20 %}
+                                    {% firstof user.first_name user.username %} <i class="icon-chevron-down"></i></a>
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url profile:edit %}"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>

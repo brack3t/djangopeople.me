@@ -14,3 +14,4 @@ python-openid==2.2.5
 requests==0.12.1
 wsgiref==0.1.2
 pytz==2012c
+django-taggit-templatetags==0.4.6dev
