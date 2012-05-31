@@ -87,18 +87,6 @@ class UserProfile(models.Model):
         return "djangopeople@example.com"
 
 
-class Site(models.Model):
-    user = models.ForeignKey(User, related_name="sites")
-    domain = models.CharField(max_length=255,
-        help_text=u"Include http(s)://")
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True,
-        help_text=u"Describe your involvement with the project.")
-
-    def __unicode__(self):
-        return self.name
-
-
 def github_user_update(sender, user, response, details, **kwargs):
     profile, create = UserProfile.objects.get_or_create(user=user)
 
