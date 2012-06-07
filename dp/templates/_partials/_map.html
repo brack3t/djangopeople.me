@@ -1,15 +1,5 @@
-<script src="http://maps.stamen.com/js/tile.stamen.js"></script>
 <script>
-    var map = new L.Map("map", {
-        center: new L.LatLng(21.505, -0.09),
-        zoom: 3
-    });
-
-    var stamenLayer = new L.StamenTileLayer("watercolor", {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-        });
-
-    map.addLayer(stamenLayer).locateAndSetView(4);
+    map.locateAndSetView(4);
 
     map.on("locationfound", function(e) {
         var hi_there = new L.Marker(e.latlng),
