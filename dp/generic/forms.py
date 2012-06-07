@@ -41,12 +41,10 @@ class SearchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
-            Fieldset("Search",
-                "location",
-                "distance",
-                "units",
-                "skills",
-            ),
+            "location",
+            "distance",
+            "units",
+            "skills",
             FormActions(
                 Submit("search", "Search", css_class="btn btn-info"),
             )
