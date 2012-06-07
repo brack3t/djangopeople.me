@@ -1,6 +1,6 @@
 import floppyforms as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, Submit
 from crispy_forms.bootstrap import FormActions
 
 
@@ -41,20 +41,11 @@ class SearchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
-            Div(
-                Fieldset("Location",
-                    "location",
-                ),
-                Fieldset("Distance",
-                    "distance",
-                    "units",
-                    css_class="span3"
-                ),
-                Fieldset("Skills",
-                    "skills",
-                    css_class="span3"
-                ),
-                css_class="row-fluid"
+            Fieldset("Search",
+                "location",
+                "distance",
+                "units",
+                "skills",
             ),
             FormActions(
                 Submit("search", "Search", css_class="btn btn-info"),

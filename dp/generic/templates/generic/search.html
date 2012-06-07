@@ -4,16 +4,21 @@
 {% block home_nav_class %}active{% endblock %}
 
 {% block page_content %}
-<h1>HOLA!</h1>
-{% crispy form %}
-
-
-<h1>{{ users }}</h1>
-{% for user in users %}
-	{% if units == "mi" %}
-		<p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
-	{% else %}
-		<p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
-	{% endif %}
-{% endfor %}
+<div class="row-fluid">
+    <div class="span3">
+        {% crispy form %}
+    </div>
+    <div class="span9" id="searchResults">
+        {% if users %}
+        <h1>Results</h1>
+            {% for user in users %}
+                {% if units == "mi" %}
+                    <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
+                {% else %}
+                    <p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
