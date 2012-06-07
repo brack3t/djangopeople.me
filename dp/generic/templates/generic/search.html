@@ -9,12 +9,12 @@
 
 {% block page_content %}
 <div class="row-fluid">
-    <div class="span3">
+    <div class="span4">
         {% crispy form %}
     </div>
-    <div class="span9" id="searchResults">
-        {% if users %}
+    <div class="span8" id="searchResults">
         <h1>Results</h1>
+        {% if users %}
             {% for user in users %}
                 {% if units == "mi" %}
                     <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>

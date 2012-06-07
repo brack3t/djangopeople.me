@@ -137,6 +137,7 @@ WSGI_APPLICATION = "dp.wsgi.application"
 TEMPLATE_DIRS = (
     root("..", "templates")
 )
+CRISPY_TEMPLATE_PACK = "bootstrap"
 
 DJANGO_APPS = (
     "django.contrib.auth",
