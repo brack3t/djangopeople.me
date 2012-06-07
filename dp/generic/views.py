@@ -56,7 +56,15 @@ class SearchView(FormView):
                 ))
 
             qs = qs.order_by("distance")
-
+            qs = self._filter_by_skills(qs, skills)
 
         return self.render_to_response({"users": qs, "form": form,
             "units": units})
+
+    def _filter_by_skills(self, queryset, skills):
+        """
+        If we have skills to pay tha billz, filter queryset yo.
+        """
+        if skills:
+            return queryset.filter(tags__name__in=skills).distinct()
+        return queryset
