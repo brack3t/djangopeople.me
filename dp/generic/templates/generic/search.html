@@ -13,9 +13,9 @@
         {% crispy form %}
     </div>
     <div class="span8" id="searchResults">
+        {% if object_list %}
         <h1>Results</h1>
-        {% if users %}
-            {% for user in users %}
+            {% for user in object_list %}
                 {% if units == "mi" %}
                     <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
                 {% else %}
@@ -25,6 +25,7 @@
         {% endif %}
     </div>
 </div>
+{% include "_partials/_pagination.html" %}
 {% endblock %}
 
 {% block extra_js %}
