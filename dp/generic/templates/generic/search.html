@@ -9,10 +9,10 @@
 
 {% block page_content %}
 <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
         {% crispy form %}
     </div>
-    <div class="span8" id="searchResults">
+    <div class="span9" id="searchResults">
         {% if object_list %}
         <h1>Results</h1>
             {% for user in object_list %}
