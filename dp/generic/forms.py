@@ -44,8 +44,7 @@ class SearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
-        self.helper.form_class = "form-inline"
-        self.helper.form_method = "POST"
+        self.helper.form_class = "well form-inline"
         self.helper.layout = Layout(
             "location",
             Div(
