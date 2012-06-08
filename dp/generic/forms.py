@@ -1,15 +1,13 @@
 import floppyforms as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Fieldset, Div, Field, MultiField
+from crispy_forms.layout import Layout, Submit, Div, Field, HTML
 from crispy_forms.bootstrap import FormActions
 
 
 class SearchForm(forms.Form):
     location = forms.CharField(
-        label='',
         widget=forms.TextInput(
             attrs={
-                "class": "search-query",
                 "placeholder": "Enter a location"
             }
         ),
@@ -20,6 +18,7 @@ class SearchForm(forms.Form):
         widget=forms.NumberInput(attrs={
             "min": 1,
             "max": 6000,
+            "class": "input-small"
         })
     )
     units = forms.ChoiceField(
@@ -27,11 +26,13 @@ class SearchForm(forms.Form):
             ("km", "km"),
             ("mi", "mi")
         ),
-        label=''
+        label='',
+        widget=forms.Select(attrs={
+            "class": "input-small"
+        })
     )
     skills = forms.CharField(
         help_text="Enter comma-separated skills",
-        label='',
         widget=forms.TextInput(
             attrs={
                 "class": "skills",
@@ -46,13 +47,18 @@ class SearchForm(forms.Form):
         self.helper.form_class = "form-inline"
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
-            Fieldset("Location", "location"),
-            MultiField("Distance",
-                Field("distance", css_class="input-small"),
-                Field("units", css_class="input-small"),
-                css_class="row-fluid"
+            "location",
+            Div(
+                HTML('<label for="id_distance" class="control-label '
+                     'requiredField">Distance*</label><br>'),
+                Div(
+                    Field("distance", template="bootstrap/custom-field.html"),
+                    Field("units", template="bootstrap/custom-field.html"),
+                    css_class="controls"
+                ),
+                css_class="clearfix control-group"
             ),
-            Fieldset("Skills", "skills"),
+            "skills",
             FormActions(
                 Submit("search", "Search", css_class="btn btn-info"),
             )
