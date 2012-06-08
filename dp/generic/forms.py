@@ -8,7 +8,7 @@ class SearchForm(forms.Form):
     location = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "class": "input-medium",
+                "class": "span11",
                 "placeholder": "Enter a location"
             }
         ),
@@ -36,7 +36,7 @@ class SearchForm(forms.Form):
         help_text="Enter comma-separated skills",
         widget=forms.TextInput(
             attrs={
-                "class": "input-medium",
+                "class": "span11",
                 "placeholder": "django, vim, redis"
             }
         ),
