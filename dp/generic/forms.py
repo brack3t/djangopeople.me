@@ -8,6 +8,7 @@ class SearchForm(forms.Form):
     location = forms.CharField(
         widget=forms.TextInput(
             attrs={
+                "class": "input-medium",
                 "placeholder": "Enter a location"
             }
         ),
@@ -16,9 +17,9 @@ class SearchForm(forms.Form):
         initial=50,
         label='',
         widget=forms.NumberInput(attrs={
+            "class": "input-small",
             "min": 1,
             "max": 6000,
-            "class": "input-small"
         })
     )
     units = forms.ChoiceField(
@@ -35,7 +36,7 @@ class SearchForm(forms.Form):
         help_text="Enter comma-separated skills",
         widget=forms.TextInput(
             attrs={
-                "class": "skills",
+                "class": "input-medium",
                 "placeholder": "django, vim, redis"
             }
         ),
