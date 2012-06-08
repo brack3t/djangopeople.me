@@ -13,16 +13,13 @@
         {% crispy form %}
     </div>
     <div class="span9" id="searchResults">
-        {% if object_list %}
-        <h1>Results</h1>
-            {% for user in object_list %}
-                {% if units == "mi" %}
-                    <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
-                {% else %}
-                    <p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        {% for user in object_list %}
+            {% if units == "mi" %}
+                <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
+            {% else %}
+                <p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
 {% include "_partials/_pagination.html" %}
