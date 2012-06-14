@@ -3,6 +3,9 @@
 
 {% block page_content %}
 <div class="row-fluid">
+    <div class="span2">
+        {% gravatar object.gravatar 150 %}
+    </div>
     <div class="span4">
         <h2>A bit about me</h2>
         {{ object.bio|linebreaks }}
@@ -13,21 +16,18 @@
         <h3>You can find me at:</h3>
         <ul class="unstyled">
         {% if object.github_username %}
-            <li><i class="icon-github-sign icon-large"></i> <a href="{{ object.github_url }}">Github</a></li>
+            <li><i class="icon-github"></i> <a href="{{ object.github_url }}">Github</a></li>
         {% endif %}
         {% if object.bitbucket_username %}
-            <li><i class="icon-external-link icon-large"></i> <a href="{{ object.bitbucket_url }}">Bitbucket</a></li>
+            <li><i class="icon-globe"></i> <a href="{{ object.bitbucket_url }}">Bitbucket</a></li>
         {% endif %}
         {% if object.twitter_username %}
-            <li><i class="icon-twitter-sign icon-large"></i> <a href="{{ object.twitter_url }}">Twitter</a></li>
+            <li><i class="icon-twitter"></i> <a href="{{ object.twitter_url }}">Twitter</a></li>
         {% endif %}
         {% if object.linkedin_username %}
-            <li><i class="icon-linkedin-sign icon-large"></i> <a href="{{ object.linkedin_url }}">LinkedIn</a></li>
+            <li><i class="icon-linkedin"></i> <a href="{{ object.linkedin_url }}">LinkedIn</a></li>
         {% endif %}
         </ul>
-    </div>
-    <div class="span2">
-        {% gravatar object.gravatar 150 %}
     </div>
 </div>
 {% endblock %}
