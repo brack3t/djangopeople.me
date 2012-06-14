@@ -38,8 +38,8 @@
 
 {% block extra_js %}
 <script>
-    var lat = $("#id_latitude").val(),
-        lng = $("#id_longitude").val(),
+    var lat = parseFloat($("#id_latitude").val()) || '',
+        lng = parseFloat($("#id_longitude").val()) || '',
         marker = new L.Marker(new L.LatLng(0, 0), {draggable: true});
 
     marker.on("dragend", function(e) {
