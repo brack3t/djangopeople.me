@@ -70,6 +70,18 @@ class UserProfileForm(forms.ModelForm):
             self.fields["latitude"].initial = self.instance.coords[0]
             self.fields["longitude"].initial = self.instance.coords[1]
 
+    def clean(self):
+        """
+        Shame user for messing with map data.
+        """
+        if not isinstance(self.data["latitude"], float) or not isinstance(
+            self.data["longitude"], float):
+
+            raise forms.ValidationError("Messing with map coordinates won't "
+                "get you anywhere.")
+
+        return super(UserProfileForm, self).clean()
+
     def save(self, *args, **kwargs):
         """
         Use lat/lng values to create a POINT on the instance.
