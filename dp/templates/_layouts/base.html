@@ -54,12 +54,14 @@
                         <li class="{% block about_nav_class %}{% endblock %}"><a href="#">About</a></li>
                         <li class="{% block contact_nav_class %}{% endblock %}"><a href="#">Contact</a></li>
                     </ul>
+                    {% if user.is_authenticated %}
                     <ul class="nav hidden-desktop">
                         <li><a href="{% url profile:edit %}"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
                         <li><a href="{% url profile:detail request.user.username %}">
                             <i class="icon-user"></i>View Public Profile</a></li>
                         <li><a href="{% url logout %}"><i class="icon-signout"></i> Sign out</a></li>
                     </ul>
+                    {% endif %}
                     <div class="pull-right">
                     {% if not user.is_authenticated %}
                         <p class="visible-desktop navbar-label pull-left">Sign in with: </p>
