@@ -54,15 +54,21 @@
                         <li class="{% block about_nav_class %}{% endblock %}"><a href="#">About</a></li>
                         <li class="{% block contact_nav_class %}{% endblock %}"><a href="#">Contact</a></li>
                     </ul>
+                    <ul class="nav hidden-desktop">
+                        <li><a href="{% url profile:edit %}"><i class="icon-cogs"></i> Edit Profile &amp; Options</a></li>
+                        <li><a href="{% url profile:detail request.user.username %}">
+                            <i class="icon-user"></i>View Public Profile</a></li>
+                        <li><a href="{% url logout %}"><i class="icon-signout"></i> Sign out</a></li>
+                    </ul>
                     <div class="pull-right">
                     {% if not user.is_authenticated %}
-                        <p class="navbar-label pull-left">Sign in with: </p>
-                        <ul class="nav pull-right">
+                        <p class="visible-desktop navbar-label pull-left">Sign in with: </p>
+                        <ul class="visible-desktop nav pull-right">
                             <li><a href="{% url socialauth_begin "twitter" %}"><i class="icon-twitter"></i> Twitter</a></li>
                             <li><a href="{% url socialauth_begin "github" %}"><i class="icon-github"></i> Github</a></li>
                         </ul>
                     {% else %}
-                        <ul class="nav pull-right">
+                        <ul class="nav pull-right visible-desktop">
                             <li class="dropdown {% block profile_nav_class %}{% endblock %}" id="profileMenu">
                                 <a class="drodown-toggle" data-toggle="dropdown" href="#profileMenu">
                                     {% gravatar user.userprofile.gravatar 20 %}
@@ -84,6 +90,15 @@
     </div>
     {% block pre_content %}{% endblock %}
     <div class="container-fluid">
+        {% if not user.is_authenticated %}
+        <div class="hidden-desktop row well">
+            <div class="span4 offset4">
+                <h2>Sign in with</h2>
+                <a href="{% url socialauth_begin "twitter" %}" class="btn btn-large btn-primary"><i class="icon-twitter"></i> Twitter</a>
+                <a href="{% url socialauth_begin "github" %}" class="btn btn-large"><i class="icon-github"></i> Github</a>
+            </div>
+        </div>
+        {% endif %}
         {% if messages %}
         <div class="messages" id="messagesContainer">
             {% for message in messages %}
