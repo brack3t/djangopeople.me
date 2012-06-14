@@ -22,11 +22,17 @@
         zoom: 3
     });
 
-    var stamenLayer = new L.StamenTileLayer("watercolor", {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-        });
+    var stamenLayer = new L.StamenTileLayer("watercolor", {attribution: ''}),
+        osmUrl = "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
+        osmOptions = {subdomains: "1234"},
+        osmLayer = new L.TileLayer(osmUrl, osmOptions),
+        baseMaps = {
+            "Watercolor": stamenLayer,
+            "Standard": osmLayer
+        },
+        layersControl = new L.Control.Layers(baseMaps);
 
-    map.addLayer(stamenLayer);
+    map.addLayer(osmLayer).addLayer(stamenLayer).addControl(layersControl);
 </script>
 {% endblock %}
 
