@@ -1,6 +1,65 @@
 {% extends "profiles/base.html" %}
 {% load crispy_forms_tags %}
 
+{% block extra_css %}
+    {% include "_partials/_map_includes.html" %}
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+{% endblock %}
+
 {% block page_content %}
 {% crispy form %}
+{% endblock %}
+
+{% block map_js %}
+<script src="http://maps.stamen.com/js/tile.stamen.js"></script>
+<script>
+    var map = new L.Map("map", {
+        center: new L.LatLng(21.505, -0.09),
+        zoom: 3
+    });
+
+    var stamenLayer = new L.StamenTileLayer("watercolor", {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+        });
+
+    map.addLayer(stamenLayer);
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var lat = $("#id_latitude").val(),
+        lng = $("#id_longitude").val(),
+        marker = new L.Marker(new L.LatLng(0, 0), {draggable: true});
+
+    marker.on("dragend", function(e) {
+        update_coords(e.target);
+    });
+
+    var update_coords = function(marker) {
+        var latlng = marker.getLatLng();
+
+        $("#id_latitude").val(latlng.lat);
+        $("#id_longitude").val(latlng.lng);
+    }
+
+    if (lat === '' || lng === '') {
+        map.locateAndSetView(13);
+
+        map.on("locationfound", function(e) {
+            marker.setLatLng(e.latlng);
+            map.addLayer(marker);
+            update_coords(marker);
+        });
+    } else {
+        var latlng = new L.LatLng(lat, lng);
+        marker.setLatLng(latlng);
+
+        map.addLayer(marker).setView(latlng, 13);
+    }
+</script>
 {% endblock %}

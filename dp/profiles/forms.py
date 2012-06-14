@@ -16,6 +16,8 @@ class UserProfileForm(forms.ModelForm):
         "to receive emails from us at. Leave blank if you don't want emails.",
         required=False)
     first_name = forms.CharField(label="Full Name")
+    latitude = forms.FloatField(widget=forms.HiddenInput())
+    longitude = forms.FloatField(widget=forms.HiddenInput())
 
     class Meta:
         model = UserProfile
@@ -36,13 +38,20 @@ class UserProfileForm(forms.ModelForm):
                     "bio",
                     css_class="span6"
                 ),
-                Fieldset("Site Details",
-                    "github_username",
-                    "bitbucket_username",
-                    "twitter_username",
-                    "linkedin_username",
-                    "anonymous_messages",
-                    "tags",
+                Div(
+                    Fieldset("Site Details",
+                        "github_username",
+                        "bitbucket_username",
+                        "twitter_username",
+                        "linkedin_username",
+                        "anonymous_messages",
+                        "tags",
+                    ),
+                    Fieldset("Location Details",
+                        Div(id="map"),
+                        "latitude",
+                        "longitude"
+                    ),
                     css_class="span6"
                 ),
                 css_class="row-fluid"
@@ -58,3 +67,5 @@ class UserProfileForm(forms.ModelForm):
             self.fields["username"].initial = user.username
             self.fields["email"].initial = user.email
             self.fields["first_name"].initial = user.first_name
+            self.fields["latitude"].initial = self.instance.coords[0]
+            self.fields["longitude"].initial = self.instance.coords[1]
