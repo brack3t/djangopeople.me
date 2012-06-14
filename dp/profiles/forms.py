@@ -69,3 +69,11 @@ class UserProfileForm(forms.ModelForm):
             self.fields["first_name"].initial = user.first_name
             self.fields["latitude"].initial = self.instance.coords[0]
             self.fields["longitude"].initial = self.instance.coords[1]
+
+    def save(self, *args, **kwargs):
+        """
+        Use lat/lng values to create a POINT on the instance.
+        """
+        self.instance.point = u"POINT(%f %f)" % (self.cleaned_data["longitude"],
+            self.cleaned_data["latitude"])
+        super(UserProfileForm, self).save(*args, **kwargs)
