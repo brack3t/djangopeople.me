@@ -1,0 +1,18 @@
+{% load gravatar %}
+<div class="search-result well">
+    <div class="row-fluid">
+        <div class="span2">
+            {% gravatar profile.gravatar 150 %}
+        </div>
+        <div class="span7">
+            <h3>{% firstof profile.user.first_name profile.user.username %}</h3>
+            <p>Distance:
+                {% if units == "mi" %}{{ profile.distance.mi }}
+                {% else %}{{ profile.distance.km }}
+                {% endif %}
+            </p>
+            <a href="{% url profile:detail profile.user.username %}" class="btn btn-primary"><i class="icon-user"></i> Profile</a>
+            <a href="#" class="btn"><i class="icon-envelope"></i> Message</a>
+        </div>
+    </div>
+</div>

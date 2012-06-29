@@ -1,5 +1,5 @@
 {% extends "_layouts/map.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags gravatar %}
 
 {% block home_nav_class %}active{% endblock %}
 
@@ -13,12 +13,8 @@
         {% crispy form %}
     </div>
     <div class="span9" id="searchResults">
-        {% for user in object_list %}
-            {% if units == "mi" %}
-                <p>{{ user.user.first_name }} - {{ user.distance.mi }}</p>
-            {% else %}
-                <p>{{ user.user.first_name }} - {{ user.distance.km }}</p>
-            {% endif %}
+        {% for profile in object_list %}
+            {% include "generic/_result.html" %}
         {% endfor %}
     </div>
 </div>
