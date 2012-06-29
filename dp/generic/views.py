@@ -16,6 +16,7 @@ class HomePageView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = SearchForm()
+        form.helper.form_action = reverse("search")
         return self.render_to_response({"form": form})
 
 
