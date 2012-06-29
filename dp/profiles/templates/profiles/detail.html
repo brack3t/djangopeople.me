@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{% load gravatar taggit_extras %}
+{% load gravatar taggit_extras crispy_forms_tags %}
 
 {% block page_content %}
 <div class="row-fluid">
@@ -28,6 +28,11 @@
             <li><i class="icon-linkedin"></i> <a href="{{ object.linkedin_url }}">LinkedIn</a></li>
         {% endif %}
         </ul>
+    </div>
+    <div class="span8">
+        {% if form %}
+            {% crispy form %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

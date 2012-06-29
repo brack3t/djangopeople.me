@@ -4,14 +4,29 @@ from django.views.generic import DetailView, UpdateView
 
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
 
+from carrier_pigeon.forms import ContactForm
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
+
 
 class ProfileView(SelectRelatedMixin, DetailView):
     model = UserProfile
     select_related = ["user"]
     slug_field = "user__username"
     template_name = "profiles/detail.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        If user allows anonymous messages, inject contact form
+        into the context.
+        """
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+
+        if obj.anonymous_messages:
+            context.update({"form": ContactForm()})
+
+        return context
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
