@@ -74,9 +74,10 @@ class UserProfileForm(forms.ModelForm):
         """
         Shame user for messing with map data.
         """
-        if not isinstance(self.data["latitude"], float) or not isinstance(
-            self.data["longitude"], float):
-
+        try:
+            float(self.data["latitude"])
+            float(self.data["longitude"])
+        except ValueError:
             raise forms.ValidationError("Messing with map coordinates won't "
                 "get you anywhere.")
 
