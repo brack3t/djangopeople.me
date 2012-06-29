@@ -1,3 +1,49 @@
 {% extends "_layouts/map.html" %}
 
 {% block home_nav_class %}active{% endblock %}
+
+{% block page_header %}
+<h1>Welcome to DjangoPeople.Me</h1>
+{% endblock %}
+
+{% block page_content %}
+    <div class="row-fluid">
+        <div class="span3">
+            <h2>Find a friend</h2>
+            {% load crispy_forms_tags %}
+            {% crispy form form.helper %}
+        </div>
+        <div class="span4">
+            <h2>Hot new members</h2>
+            <ul>
+                <li>
+                    <h3></h3>
+                    <p></p>
+                </li>
+                <li>
+                    <h3></h3>
+                    <p></p>
+                </li>
+                <li>
+                    <h3></h3>
+                    <p></p>
+                </li>
+                <li>
+                    <h3></h3>
+                    <p></p>
+                </li>
+            </ul>
+        </div>
+        <div class="span4">
+            <h2>What we're about</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h2>Quick stats</h2>
+            <p>We have <strong>5,000</strong> members and over <strong>300</strong> signed up yesterday!</p>
+        </div>
+    </div>
+{% endblock %}

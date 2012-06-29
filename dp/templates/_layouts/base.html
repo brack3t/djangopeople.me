@@ -78,10 +78,12 @@
     <div class="container-fluid">
         {% if not user.is_authenticated %}
         <div class="row">
-            <div class="span4 offset5 well">
-                <h2>Sign in with
-                    <a href="{% url socialauth_begin "twitter" %}" class="btn btn-large btn-primary"><i class="icon-twitter"></i> Twitter</a>
-                    <a href="{% url socialauth_begin "github" %}" class="btn btn-large"><i class="icon-github"></i> Github</a>
+            <div class="span6 offset4 well">
+                <h2>Your account is ready! Sign in:
+                    <div class="pull-right">
+                        <a href="{% url socialauth_begin "twitter" %}" class="btn btn-large btn-primary"><i class="icon-twitter"></i> Twitter</a>
+                        <a href="{% url socialauth_begin "github" %}" class="btn btn-large"><i class="icon-github"></i> Github</a>
+                    </div>
                 </h2>
             </div>
         </div>

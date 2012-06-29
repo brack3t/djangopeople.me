@@ -15,7 +15,8 @@ class HomePageView(TemplateView):
     template_name = "generic/index.html"
 
     def get(self, request, *args, **kwargs):
-        return self.render_to_response({})
+        form = SearchForm()
+        return self.render_to_response({"form": form})
 
 
 class LogoutView(LoginRequiredMixin, RedirectView):
