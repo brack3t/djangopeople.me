@@ -7,26 +7,26 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="row-fluid">
-    <div class="span2">
-        <dl>
-            <dt>From</dt>
-            <dd>{% firstof object.sender.get_full_name object.sender.username object.anonymous_message_display %}</dd>
-            <dt>Date Sent</dt>
-            <dd><time datetime="{{ object.sent_at }}">{{ object.sent_at|naturalday }} at {{ object.sent_at|naturaltime }}</time></dd>
-            <dt>Date Read</dt>
-            <dd><time datetime="{{ object.read_at }}">{{ object.read_at|naturalday }} at {{ object.read_at|naturaltime }}</time></dd>
-            {% if object.replied_at %}
-            <dt>Date Replied</dt>
-            <dd><time datetime="{{ object.replied_at }}">{{ object.replied_at|naturalday }} at {{ object.replied_at|naturaltime }}</time></dd>
-            {% endif %}
-        </dl>
-    </div>
-    <div class="span10">
-        <dl>
-            <dt>Message</dt>
-            <dd>{{ message.body }}</dd>
-        </dl>
-    </div>
-</div>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <th>From</th>
+            <td colspan="3">
+                {% if object.sender %}<a href="{% url profile:detail object.sender.username %}">{% endif %}
+                {% firstof object.sender.first_name object.sender.username object.anonymous_message_display %}
+                {% if object.sender %}</a>{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Date Sent</th>
+            <td><time datetime="{{ object.send_at }}">{{ object.sent_at|naturalday }}, {{ object.sent_at|naturaltime }}</time></td>
+            <th>Date Read</th>
+            <td><time datetime="{{ object.read_at }}">{{ object.read_at|naturalday }}, {{ object.read_at|naturaltime }}</time></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td colspan="3">{{ message.body }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endblock %}
