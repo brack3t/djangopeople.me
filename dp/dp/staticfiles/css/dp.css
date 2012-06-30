@@ -1,1 +1,71 @@
-.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:""}.clearfix:after{clear:both}.hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}.input-block-level{display:block;width:100%;min-height:28px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box}body{color:#222}body.standard-page{padding-top:40px}.navbar .navbar-label{color:#eee;font-weight:bold;line-height:18px;padding-top:9px}#mapContainer{margin-bottom:20px;margin-top:40px}#mapContainer #map{height:600px}#messagesContainer{margin-top:20px}@media(max-width:979px){body.standard-page{padding-top:0}#mapContainer{margin:-18px -20px 20px -20px}}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* CUSTOM COLORS */
+/* colors from http://www.colourlovers.com/palette/1236225/0011 */
+body {
+  color: #222222;
+}
+body.standard-page {
+  padding-top: 40px;
+}
+.navbar .navbar-label {
+  color: #eeeeee;
+  font-weight: bold;
+  line-height: 18px;
+  padding-top: 9px;
+}
+#mapContainer {
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+#mapContainer #map {
+  height: 600px;
+}
+#messagesContainer {
+  margin-top: 20px;
+}
+@media (max-width: 979px) {
+  body.standard-page {
+    padding-top: 0;
+  }
+  #mapContainer {
+    margin: -18px -20px 20px -20px;
+  }
+}
+table.message tbody tr th {
+  background-color: #eeeeee;
+  border-collapse: collapse;
+  max-width: 150px;
+  min-width: 100px;
+  width: 100px;
+}
+table.message tbody tr:nth-of-type(2) td:nth-of-type(1) {
+  max-width: 350px;
+  min-width: 300px;
+  width: 300px;
+}
