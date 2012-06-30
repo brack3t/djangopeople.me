@@ -1,6 +1,6 @@
 import floppyforms as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, Submit
 from crispy_forms.bootstrap import FormActions
 
 from carrier_pigeon.models import Message
@@ -18,16 +18,11 @@ class ContactForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
-            Div(
-                Div(
-                    Fieldset("",
-                        "name",
-                        "email",
-                        "subject",
-                        "body"
-                    ),
-                ),
-            css_class="row-fluid"
+            Fieldset("Send me a message",
+                "name",
+                "email",
+                "subject",
+                "body"
             ),
             FormActions(
                 Submit("send", "Send", css_class="btn btn-success"),

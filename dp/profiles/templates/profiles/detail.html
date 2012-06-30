@@ -4,16 +4,12 @@
 {% block page_content %}
 <div class="row-fluid">
     <div class="span2">
-        {% gravatar object.gravatar 150 %}
-    </div>
-    <div class="span4">
-        <h2>A bit about me</h2>
-        {{ object.bio|linebreaks }}
-        <p>Currently, I'm looking for: <strong>{{ object.get_available_for_display }}</strong></p>
-        <p>I describe myself as: <strong>{{ object.tags.all|join:"</strong>, <strong>" }}</strong></p>
-    </div>
-    <div class="span4">
-        <h3>You can find me at:</h3>
+        <p>{% gravatar object.gravatar 150 %}</p>
+
+        {% if object.user.email and object.anonymous_messages or user.is_authenticated %}
+        <p><a href="#" class="btn btn-primary" id="message_me"><i class="icon-envelope"></i> Message me!</a></p>
+        {% endif %}
+
         <ul class="unstyled">
         {% if object.github_username %}
             <li><i class="icon-github"></i> <a href="{{ object.github_url }}">Github</a></li>
@@ -29,10 +25,20 @@
         {% endif %}
         </ul>
     </div>
-    <div class="span8">
+    <div class="span4">
+        <h2>A bit about me</h2>
+        {{ object.bio|linebreaks }}
+        <p>Currently, I'm looking for: <strong>{{ object.get_available_for_display }}</strong></p>
+        <p>I describe myself as: <strong>{{ object.tags.all|join:"</strong>, <strong>" }}</strong></p>
+    </div>
+    <div class="span4" id="message_form">
         {% if form %}
             {% crispy form %}
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ STATIC_URL }}profile_detail.js"></script>
 {% endblock %}
