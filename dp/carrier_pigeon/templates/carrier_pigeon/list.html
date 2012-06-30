@@ -13,7 +13,8 @@
         <tr>
             <th class="messages-from">From</th>
             <th class="messages-subject">Subject</th>
-            <th class="messagse-date">Date</th>
+            <th class="messages-date-received">Date Received</th>
+            <th class="messages-date-read">Date Read</th>
             <th class="messages-tools"></th>
         </tr>
     </thead>
@@ -22,11 +23,12 @@
         <tr>
             <td class="messages-from">
                 {% if message.sender %}<a href="{% url profile:detail message.sender.username %}">{% endif %}
-                {% firstof message.sender.get_full_name message.sender.username message.anonymous_message_display %}
+                {% firstof message.sender.first_name message.sender.username message.anonymous_message_display %}
                 {% if message.sender %}</a>{% endif %}
             </td>
             <td class="messages-subject"><a href="{% url pigeon:detail message.pk %}">{{ message.subject|truncatewords:15 }}</a></td>
-            <td class="messages-date"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
+            <td class="messages-date-received"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
+            <td class="messages-date-read"><time datetime="{{ message.read_at|default:"" }}">{{ message.read_at|default:"" }}</time></td>
             <td class="messages-tools"></td>
         </tr>
         {% empty %}
