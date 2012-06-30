@@ -33,6 +33,10 @@ class ContactForm(forms.ModelForm):
         self.fields["recipient"].widget = forms.HiddenInput()
         self.fields["sender"].widget = forms.HiddenInput()
 
+        if not user:
+            self.fields["name"].required = True
+            self.fields["email"].required = True
+
         if user:
             self.fields["name"].initial = user.first_name
             self.fields["name"].widget = forms.HiddenInput()

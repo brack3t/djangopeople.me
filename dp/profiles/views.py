@@ -24,14 +24,15 @@ class ProfileView(SelectRelatedMixin, DetailView):
         context = super(ProfileView, self).get_context_data(**kwargs)
         obj = self.get_object()
 
-        if self.request.user.is_authenticated():
-            context.update({"form": ContactForm(self.request.POST or None,
-                initial={"recipient": obj.user_id,
-                "sender": self.request.user.pk}, user=self.request.user)})
+        if self.request.user != obj.user:
+            if self.request.user.is_authenticated():
+                context.update({"form": ContactForm(self.request.POST or None,
+                    initial={"recipient": obj.user_id,
+                    "sender": self.request.user.pk}, user=self.request.user)})
 
-        if not self.request.user.is_authenticated() and obj.anonymous_messages:
-            context.update({"form": ContactForm(self.request.POST or None,
-                initial={"recipient": obj.user_id})})
+            if not self.request.user.is_authenticated() and obj.anonymous_messages:
+                context.update({"form": ContactForm(self.request.POST or None,
+                    initial={"recipient": obj.user_id})})
 
         return context
 
@@ -40,6 +41,7 @@ class ProfileView(SelectRelatedMixin, DetailView):
         form = ContactForm(request.POST)
         if form.is_valid():
             # Send Email!
+            form.save()
             messages.success(request, u"Woo!")
             return HttpResponseRedirect(reverse("profile:detail",
                 kwargs={"slug": self.object.user.username}))
