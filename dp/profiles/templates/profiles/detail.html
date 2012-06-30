@@ -7,7 +7,7 @@
         <p>{% gravatar object.gravatar 150 %}</p>
 
         {% if object.user.email and object.anonymous_messages or user.is_authenticated %}
-        <p><a href="#" class="btn btn-primary" id="message_me"><i class="icon-envelope"></i> Message me!</a></p>
+        <p><a href="#" class="btn btn-primary{% if object.user == user %} disabled{% endif %}" id="message_me"><i class="icon-envelope"></i> Message me!</a></p>
         {% endif %}
 
         <ul class="unstyled">
