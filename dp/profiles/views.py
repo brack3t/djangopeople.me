@@ -4,14 +4,35 @@ from django.views.generic import DetailView, UpdateView
 
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
 
+from carrier_pigeon.forms import ContactForm
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
+
 
 class ProfileView(SelectRelatedMixin, DetailView):
     model = UserProfile
     select_related = ["user"]
     slug_field = "user__username"
     template_name = "profiles/detail.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        Authenticated users can message anyone. If anonymous messages
+        are enabled and user is not authenticated add form.
+        """
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+
+        if self.request.user.is_authenticated():
+            context.update({"form": ContactForm(initial={
+                "recipient": obj.user_id, "sender": self.request.user.pk},
+                user=self.request.user)})
+
+        if not self.request.user.is_authenticated() and obj.anonymous_messages:
+            context.update({"form": ContactForm(initial={
+                "recipient": obj.user_id})})
+
+        return context
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

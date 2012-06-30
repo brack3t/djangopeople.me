@@ -13,11 +13,11 @@ class Message(models.Model):
     recipient = models.ForeignKey(User, related_name="received_messages")
     name = models.CharField(max_length=75, blank=True)
     email = models.EmailField(blank=True)
-    sent_at = models.DateTimeField(auto_now_add=True)
-    read_at = models.DateTimeField(blank=True, null=True)
-    replied_at = models.DateTimeField(blank=True, null=True)
-    sender_archived = models.BooleanField(default=False)
-    recipient_archived = models.BooleanField(default=False)
+    sent_at = models.DateTimeField(auto_now_add=True, editable=False)
+    read_at = models.DateTimeField(blank=True, editable=False, null=True)
+    replied_at = models.DateTimeField(blank=True, editable=False, null=True)
+    sender_archived = models.BooleanField(default=False, editable=False)
+    recipient_archived = models.BooleanField(default=False, editable=False)
 
 
     class Meta:
