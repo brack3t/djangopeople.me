@@ -12,18 +12,16 @@ class ContactForm(forms.ModelForm):
         model = Message
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+
         self.helper = FormHelper()
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
             Div(
                 Div(
-                    Fieldset("Your Contact Info",
+                    Fieldset("",
                         "name",
-                        "email"
-                    ),
-                ),
-                Div(
-                    Fieldset("Message",
+                        "email",
                         "subject",
                         "body"
                     ),
@@ -35,3 +33,12 @@ class ContactForm(forms.ModelForm):
             )
         )
         super(ContactForm, self).__init__(*args, **kwargs)
+
+        self.fields["recipient"].widget = forms.HiddenInput()
+        self.fields["sender"].widget = forms.HiddenInput()
+
+        if user:
+            self.fields["name"].initial = user.first_name
+            self.fields["name"].widget = forms.HiddenInput()
+            self.fields["email"].initial = user.email
+            self.fields["email"].widget = forms.HiddenInput()

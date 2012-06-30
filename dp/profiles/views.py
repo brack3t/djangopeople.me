@@ -17,14 +17,20 @@ class ProfileView(SelectRelatedMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         """
-        If user allows anonymous messages, inject contact form
-        into the context.
+        Authenticated users can message anyone. If anonymous messages
+        are enabled and user is not authenticated add form.
         """
         context = super(ProfileView, self).get_context_data(**kwargs)
         obj = self.get_object()
 
-        if obj.anonymous_messages:
-            context.update({"form": ContactForm()})
+        if self.request.user.is_authenticated():
+            context.update({"form": ContactForm(initial={
+                "recipient": obj.user_id, "sender": self.request.user.pk},
+                user=self.request.user)})
+
+        if not self.request.user.is_authenticated() and obj.anonymous_messages:
+            context.update({"form": ContactForm(initial={
+                "recipient": obj.user_id})})
 
         return context
 
