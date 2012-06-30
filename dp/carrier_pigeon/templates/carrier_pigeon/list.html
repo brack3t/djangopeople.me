@@ -20,7 +20,15 @@
     <tbody>
         {% for message in object_list %}
         <tr>
-            <td class="messages-from">{% firstof message.sender.get_full_name message.sender.username message.anonymous_message_display %}</td>
+            <td class="messages-from">
+                {% if message.sender %}
+                    <a href="{% url profile:detail message.sender.username %}">
+                {% endif %}
+                {% firstof message.sender.get_full_name message.sender.username message.anonymous_message_display %}
+                {% if message.sender %}
+                    </a>
+                {% endif %}
+            </td>
             <td class="messages-subject"><a href="{% url pigeon:detail message.pk %}">{{ message.subject|truncatewords:15 }}</a></td>
             <td class="messages-date"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
             <td class="messages-tools"></td>
