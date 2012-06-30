@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, UpdateView
 
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
@@ -24,15 +25,27 @@ class ProfileView(SelectRelatedMixin, DetailView):
         obj = self.get_object()
 
         if self.request.user.is_authenticated():
-            context.update({"form": ContactForm(initial={
-                "recipient": obj.user_id, "sender": self.request.user.pk},
-                user=self.request.user)})
+            context.update({"form": ContactForm(self.request.POST or None,
+                initial={"recipient": obj.user_id,
+                "sender": self.request.user.pk}, user=self.request.user)})
 
         if not self.request.user.is_authenticated() and obj.anonymous_messages:
-            context.update({"form": ContactForm(initial={
-                "recipient": obj.user_id})})
+            context.update({"form": ContactForm(self.request.POST or None,
+                initial={"recipient": obj.user_id})})
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Send Email!
+            messages.success(request, u"Woo!")
+            return HttpResponseRedirect(reverse("profile:detail",
+                kwargs={"slug": self.object.user.username}))
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

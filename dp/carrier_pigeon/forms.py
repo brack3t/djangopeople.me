@@ -8,6 +8,7 @@ from carrier_pigeon.models import Message
 
 class ContactForm(forms.ModelForm):
 
+
     class Meta:
         model = Message
 
