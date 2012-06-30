@@ -7,8 +7,10 @@
         <div class="span7">
             <h3>{% firstof profile.user.first_name profile.user.username %}</h3>
             <p>Distance: <span class="distance">
-                {% if units == "mi" %}{{ profile.distance.mi }}
-                {% else %}{{ profile.distance.km }}
+                {% if units == "mi" %}
+                    {{ profile.distance.mi|floatformat }} mi
+                {% else %}
+                    {{ profile.distance.km|floatformat }} km
                 {% endif %}</span>
             </p>
             <a href="{% url profile:detail profile.user.username %}" class="btn btn-primary"><i class="icon-user"></i> Profile</a>
