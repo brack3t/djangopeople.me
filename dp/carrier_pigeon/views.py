@@ -1,6 +1,9 @@
 from datetime import datetime
 
-from django.views.generic import ListView, DetailView
+from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.views.generic import ListView, DetailView, RedirectView
 from django.utils.timezone import utc
 
 from braces.views import LoginRequiredMixin, SetHeadlineMixin
@@ -50,3 +53,22 @@ class MessageDetailView(LoginRequiredMixin, DetailView):
             obj.save()
 
         return obj
+
+
+class ArchiveMessageView(LoginRequiredMixin, RedirectView):
+    model = Message
+    url = "pigeon:inbox"
+
+    def get_redirect_url(self, **kwargs):
+        return reverse(self.url)
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            message = self.model.objects.get(pk=pk, recipient=request.user)
+        except self.model.DoesNotExist:
+            return Http404
+
+        message.recipient_archived = True
+        message.save()
+        messages.success(request, "Message archived.")
+        return super(ArchiveMessageView, self).get(request, pk, *args, **kwargs)

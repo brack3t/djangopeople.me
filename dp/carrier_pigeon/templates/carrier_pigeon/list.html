@@ -29,7 +29,7 @@
             <td class="messages-subject"><a href="{% url pigeon:detail message.pk %}">{{ message.subject|truncatewords:15 }}</a></td>
             <td class="messages-date-received"><time datetime="{{ message.sent_at }}">{{ message.sent_at }}</time></td>
             <td class="messages-date-read"><time datetime="{{ message.read_at|default:"" }}">{{ message.read_at|default:"" }}</time></td>
-            <td class="messages-tools"></td>
+            <td class="messages-tools"><a href="{% url pigeon:action_archive message.pk %}" class="btn"><i class="icon-download-alt"></i></a></td>
         </tr>
         {% empty %}
         <tr>
