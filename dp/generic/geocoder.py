@@ -32,6 +32,8 @@ class Geocoder(object):
                 lng = data["results"][0]["locations"][0]["displayLatLng"]["lng"]
                 return {
                     "point": u"POINT(%s %s)" % (lng, lat),
+                    "lat": lat,
+                    "lng": lng,
                     "status": True
                 }
             except KeyError:

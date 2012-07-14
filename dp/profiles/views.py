@@ -1,11 +1,14 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.views.generic import DetailView, UpdateView
+from django.http import (HttpResponse, HttpResponseRedirect,
+                        HttpResponseForbidden)
+from django.utils import simplejson as json
+from django.views.generic import DetailView, UpdateView, View
 
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
 
 from carrier_pigeon.forms import ContactForm
+from generic.geocoder import Geocoder
 from profiles.forms import UserProfileForm, LocationSearchForm
 from profiles.models import UserProfile
 
@@ -77,3 +80,20 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, "Your profile has been updated.")
 
         return super(ProfileUpdateView, self).form_valid(form)
+
+
+class LocationSearchView(LoginRequiredMixin, View):
+    """
+    Returns a lat, lng response if a valid search string came through.
+    """
+
+    def post(self, request, *args, **kwargs):
+        form = LocationSearchForm(request.POST or None)
+        if form.is_valid():
+            point = Geocoder().mapquest_geocode(form.cleaned_data["location"])
+            response = {"success": True, "lat": point["lat"],
+                "lng": point["lng"]}
+            return HttpResponse(json.dumps(response),
+                mimetype="application/json")
+        else:
+            return HttpResponseForbidden()

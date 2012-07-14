@@ -13,7 +13,7 @@
 {% block page_content %}
 {% crispy form %}
 
-<div class="modal hide" id="location-modal">
+<div class="modal hide fade" id="location-modal">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Location Search</h3>
@@ -51,12 +51,25 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ STATIC_URL }}django_csrf.js"></script>
 <script>
-    $(function() {
-        $("#location-form").submit(function(e) {
-            e.preventDefault();
-            alert("Submitted");
-        });
+    $(document).on("submit", "#location-form", function(e) {
+        e.preventDefault();
+        var form = $(this),
+            url = "{% url profile:location_search %}",
+            data = form.serialize(),
+            ajax_req = $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function(data, textStatus, jqXHR) {
+                    $("#location-modal").modal("toggle");
+                    console.log(data);
+                },
+                error: function(data, textStatus, jqXHR) {
+                    console.log("error");
+                }
+            });
     });
 
     var lat = parseFloat($("#id_latitude").val()) || '',
