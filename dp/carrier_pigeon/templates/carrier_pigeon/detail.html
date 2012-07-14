@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block page_content %}
+{% if not object.recipient_archived %}
+<p><a href="{% url pigeon:action_archive message.pk %}" class="btn">Archive Message</a></p>
+{% endif %}
 <table class="table table-bordered message">
     <tbody>
         <tr>
