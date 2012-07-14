@@ -1,9 +1,10 @@
 import floppyforms as forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, Submit, Div, HTML
 from crispy_forms.bootstrap import FormActions
 
 from profiles.models import UserProfile
+
 
 class UserProfileForm(forms.ModelForm):
     username = forms.RegexField(label="Username", max_length=30,
@@ -50,7 +51,9 @@ class UserProfileForm(forms.ModelForm):
                     Fieldset("Location Details",
                         Div(id="map"),
                         "latitude",
-                        "longitude"
+                        "longitude",
+                        HTML("<p><a class='btn' data-toggle='modal' "
+                            "href='#location-modal'>Location Search</a></p>")
                     ),
                     css_class="span6"
                 ),
@@ -90,3 +93,20 @@ class UserProfileForm(forms.ModelForm):
         self.instance.point = u"POINT(%f %f)" % (self.cleaned_data["longitude"],
             self.cleaned_data["latitude"])
         super(UserProfileForm, self).save(*args, **kwargs)
+
+
+class LocationSearchForm(forms.Form):
+    location = forms.CharField(max_length=255)
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_id = "location-form"
+        self.helper.form_method = "POST"
+        self.helper.layout = Layout(
+            Fieldset("",
+                "location",
+            ),
+            FormActions(
+                Submit("search", "Search", css_class="btn btn-success"))
+        )
+        super(LocationSearchForm, self).__init__(*args, **kwargs)

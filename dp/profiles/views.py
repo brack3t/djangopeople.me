@@ -6,7 +6,7 @@ from django.views.generic import DetailView, UpdateView
 from braces.views import LoginRequiredMixin, SelectRelatedMixin
 
 from carrier_pigeon.forms import ContactForm
-from profiles.forms import UserProfileForm
+from profiles.forms import UserProfileForm, LocationSearchForm
 from profiles.models import UserProfile
 
 
@@ -60,6 +60,11 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse("profile:edit")
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileUpdateView, self).get_context_data(**kwargs)
+        context.update({"location_form": LocationSearchForm()})
+        return context
 
     def form_valid(self, form):
         data = form.cleaned_data
